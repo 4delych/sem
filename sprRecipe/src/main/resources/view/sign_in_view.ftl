@@ -1,21 +1,27 @@
 <html lang="en">
 
 <head>
-    <title>Welcome to AHMED!</title>
-    <link rel="stylesheet" href="/res/style.css">
+    <title>Вход</title>
 </head>
 
 <body>
-<h1>SIGN IN</h1>
-<#if error?? && error=='true'>
-    <div class="error">AHMED!</div>
+<h1>Вход</h1>
+<#if error??>
+    <div class="error">${error}</div>
+</#if>
+<#if logout??>
+    <div class="success">${logout}</div>
 </#if>
 <form method="post">
-    <input type="text" name="username" placeholder="username" value="ahmed">
-    <input type="password" name="password" placeholder="password" value="123123">
-    <input type="submit" value="SUBMIT">
+    <label for="username">email
+        <input type="text" name="username" placeholder="email" required autocomplete="new-password">
+    </label>
+    <label for="password"> password
+        <input type="password" name="password" placeholder="password" required autocomplete="new-password">
+    </label>
+    <input type="submit" value="Войти">
 </form>
 
-<div>Dont have an account?</div>
-<a href="/sign-up">SIGN UP</a>
+<div>Нет аккаунта?</div>
+<a href="/sign-up">Зарегестрироваться</a>
 </body>

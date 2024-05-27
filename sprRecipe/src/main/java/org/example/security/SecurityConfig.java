@@ -23,6 +23,7 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
     private final AuthService authService;
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -33,12 +34,15 @@ public class SecurityConfig {
                 .formLogin(form ->
                         form
                                 .loginPage("/sign-in")
-                                .defaultSuccessUrl("/test")
+                                .defaultSuccessUrl("/profile")
                                 .failureUrl("/sign-in?error=true")
                                 .permitAll()
                 )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/sign-in?logout=true")
+                        .deleteCookies("JSESSIONID")
+                        .permitAll())
                 .csrf(AbstractHttpConfigurer::disable)
-                // .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
     }
 

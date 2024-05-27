@@ -1,45 +1,24 @@
 package org.example.controller.handlers;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.ErrorValidInfo;
-import org.example.dto.ValidError;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindException;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.example.exception.UserAlreadyExistsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 @Slf4j
 public class ErrorsController {
-    @ExceptionHandler(BindException.class)
-    public ResponseEntity<ErrorValidInfo> handleBindException(BindException e, HttpServletRequest request) {
-        log.warn(String.format("Got validation exception %s from URL %s", e.getMessage(), request.getRequestURI()));
-        var dtoValidationError = ErrorValidInfo.builder()
-                .code(HttpStatus.BAD_REQUEST)
-                .message("Validation error")
-                .validErrors(processFieldErrors(e.getBindingResult()))
-                .path(request.getRequestURI())
-                .exceptionName(e.getClass().getSimpleName())
-                .build();
-        return new ResponseEntity<>(dtoValidationError, dtoValidationError.getCode());
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public String handleUserAlreadyExistsException(UserAlreadyExistsException e, Model model) {
+        model.addAttribute("error", e.getMessage());
+        return "sign_up_view";
     }
 
-    private List<ValidError> processFieldErrors(BindingResult bindingResult) {
-        return bindingResult.getAllErrors().stream()
-                .map(e -> {
-                    if (e instanceof FieldError error) {
-                        return new ValidError(error.getField(), error.getDefaultMessage());
-                    }
-                    return new ValidError(e.getObjectName(), e.getDefaultMessage());
-                })
-                .collect(Collectors.toList());
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public String handleUsernameNotFoundException(UsernameNotFoundException e, Model model) {
+        model.addAttribute("error", "Неверное имя пользователя или пароль");
+        return "sign_in_view";
     }
 }

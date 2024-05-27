@@ -1,6 +1,7 @@
 package org.example.security;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.example.model.Role;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,24 +13,17 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Builder
+@Data
 public class UserDetailsImpl implements UserDetails {
     private final String username;
+    private final String firstName;
+    private final String lastName;
     private final String password;
     private final List<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     @Override

@@ -1,7 +1,8 @@
 package org.example.services.impl;
 
 import lombok.AllArgsConstructor;
-import org.example.dto.RegistrationForm;
+
+import org.example.dto.SignUpForm;
 import org.example.exception.UserAlreadyExistsException;
 import org.example.model.Role;
 import org.example.model.User;
@@ -24,28 +25,32 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void register(RegistrationForm form) throws UserAlreadyExistsException {
-        if(usersRepository.existsByUsername(form.getUsername())) {
-            throw new UserAlreadyExistsException("AHMEEEEED!");
-        }
-        User user = User.builder()
-                .username(form.getUsername())
-                .passwordHash(passwordEncoder.encode(form.getPassword()))
-                .role(Role.ROLE_USER)
-                .build();
-        usersRepository.save(user);
+    public void register(SignUpForm form) throws UserAlreadyExistsException {
+            if(usersRepository.existsByUsername(form.getUsername())) {
+                throw new UserAlreadyExistsException("already exist");
+            }
+            User user = User.builder()
+                    .firstname(form.getFirstName())
+                    .lastname(form.getLastName())
+                    .username(form.getUsername())
+                    .password(passwordEncoder.encode(form.getPassword()))
+                    .role(Role.ROLE_ADMIN)
+                    .build();
+            usersRepository.save(user);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> optionalUser = usersRepository.findByUsername(username);
         if(optionalUser.isEmpty()) {
-            throw new UsernameNotFoundException("AHMED!!!!");
+            throw new UsernameNotFoundException("not found");
         }
         User user = optionalUser.get();
         return UserDetailsImpl.builder()
                 .username(user.getUsername())
-                .password(user.getPasswordHash())
+                .firstName(user.getFirstname())
+                .lastName(user.getLastname())
+                .password(user.getPassword())
                 .roles(List.of(user.getRole()))
                 .build();
     }

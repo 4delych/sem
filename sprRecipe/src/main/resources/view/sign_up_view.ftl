@@ -1,21 +1,31 @@
 <html lang="en">
 
 <head>
-    <title>REGISTRATION!</title>
-    <link rel="stylesheet" href="/res/style.css">
+    <title>Регистрация</title>
 </head>
 
 <body>
-<h1>SIGN UP</h1>
-<#if error?? && error=='true'>
-    <div class="error">AHMED!</div>
+<h1>Регистрация</h1>
+<#if error??>
+    <div class="error">${error}</div>
 </#if>
-<form method="post">
-    <input type="text" name="username" placeholder="username" value="ahmed">
-    <input type="password" name="password" placeholder="password" value="123123">
-    <input type="submit" value="SUBMIT">
+<form action="/sign-up" method="post">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required autocomplete="new-password">
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required autocomplete="new-password">
+
+    <label for="username">Email:</label>
+    <input type="text" id="username" name="username" required autocomplete="new-password">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required minlength="5" autocomplete="new-password">
+
+    <button type="submit">Зарегистрироваться</button>
 </form>
 
-<div>Already have an account?</div>
-<a href="/sign-in">SIGN IN</a>
+
+<div>Уже есть аккаунт?</div>
+<a href="/sign-in">Войти</a>
 </body>
