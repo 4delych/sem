@@ -6,9 +6,10 @@
 </head>
 <body>
 <div>
-    <li><a href="/profile">Профиль</a></li>
-    <li><a href="/recipes">Список рецептов</a></li>
+    <li><a href="/recipes">Каталог</a></li>
+    <li><a href="/categories">Категории</a></li>
     <li><a href="/favorites">Избранные рецепты</a></li>
+    <li><a href="/profile">Профиль</a></li>
 </div>
 <hr>
 </body>

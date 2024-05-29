@@ -17,9 +17,9 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String userProfile(Model model, Principal principal) {
-        String username = principal.getName(); // Получаем имя пользователя, который вошел в систему
-        UserDetails user = authService.loadUserByUsername(username); // Получаем данные пользователя из сервиса аутентификации
-        model.addAttribute("user", user); // Передаем данные пользователя в модель
+        String username = principal.getName();
+        UserDetails user = authService.loadUserByUsername(username);
+        model.addAttribute("user", user);
         return "profile_view"; // Возвращаем имя представления
     }
 }

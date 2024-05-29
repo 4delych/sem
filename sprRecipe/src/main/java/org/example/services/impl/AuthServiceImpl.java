@@ -51,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
                 .firstName(user.getFirstname())
                 .lastName(user.getLastname())
                 .password(user.getPassword())
-                .roles(List.of(user.getRole()))
+                .role(user.getRole())
                 .build();
     }
 }

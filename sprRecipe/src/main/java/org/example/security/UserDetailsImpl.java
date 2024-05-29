@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,11 +20,13 @@ public class UserDetailsImpl implements UserDetails {
     private final String firstName;
     private final String lastName;
     private final String password;
-    private final List<Role> roles;
+    private final Role role;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return Collections.singleton(role);
     }
 
     @Override

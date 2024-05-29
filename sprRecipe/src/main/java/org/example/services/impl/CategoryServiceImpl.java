@@ -7,6 +7,7 @@ import org.example.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -17,6 +18,14 @@ public class CategoryServiceImpl {
         Category category = new Category();
         category.setCategoryName(form.getCategoryName());
         categoryRepository.save(category);
+    }
+
+    public void deleteCategory(UUID id){
+        categoryRepository.deleteById(id);
+    }
+
+    public Category getCategoryById(UUID id){
+        return categoryRepository.findById(id).orElseThrow();
     }
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();

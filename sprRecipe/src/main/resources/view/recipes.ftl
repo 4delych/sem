@@ -14,6 +14,9 @@
         <th>Название</th>
         <th>Описание</th>
         <th>Категория</th>
+        <#if user.role = "ROLE_ADMIN">
+            <th>Действие</th>
+        </#if>
     </tr>
     </thead>
     <tbody>
@@ -22,10 +25,16 @@
             <td><a href="/recipe/${recipe.recipe_id}">${recipe.name}</a></td>
             <td>${recipe.description}</td>
             <td>${recipe.category.categoryName}</td>
+            <#if user.role = "ROLE_ADMIN">
+                <td>
+                    <form action="/admin/delete-recipe/${recipe.recipe_id}" method="post">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
+            </#if>
         </tr>
     </#list>
     </tbody>
 </table>
-<a href="/create-recipe">Создать новый рецепт</a>
 </body>
 </html>

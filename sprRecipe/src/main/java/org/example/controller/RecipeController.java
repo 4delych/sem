@@ -25,27 +25,15 @@ import java.util.UUID;
 @AllArgsConstructor
 public class RecipeController {
     private final RecipeServiceImpl recipeService;
-    private final CategoryServiceImpl categoryService;
     private final UserServiceImpl userService;
 
     private final FavoriteServiceImpl favoriteService;
 
-    @GetMapping("/create-recipe")
-    public String recipeView(Model model){
-        model.addAttribute("recipeForm", new RecipeForm());
-        List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
-        return "create_recipe";
-    }
-    @PostMapping("/create_recipe")
-    public String createRecipe(@ModelAttribute @Valid RecipeForm form){
-        recipeService.createRecipe(form);
-        return "redirect:/recipes";
-    }
-
     @GetMapping("/recipes")
-    public String listRecipes(Model model){
+    public String listRecipes(Model model, Principal principal){
         List<Recipe> recipes = recipeService.getAllRecipes();
+        User user = userService.getUserByUsername(principal.getName());
+        model.addAttribute("user", user);
         model.addAttribute("recipes", recipes);
         return "recipes";
     }

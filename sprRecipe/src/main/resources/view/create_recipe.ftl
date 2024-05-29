@@ -9,7 +9,7 @@
 <body>
 <h1>Создать рецепт</h1>
 
-<form action="/create_recipe" method="post">
+<form action="/admin/create-recipe" method="post">
     <label for="name">Название:</label>
     <input type="text" id="name" name="name" required>
 
@@ -26,6 +26,6 @@
     <button type="submit">Создать рецепт</button>
 </form>
 
-<a href="/recipes">Назад к списку рецептов</a>
+<a href="/recipes">К списку рецептов</a>
 </body>
 </html>

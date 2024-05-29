@@ -11,7 +11,9 @@
     <strong>Имя:</strong> ${user.firstName}<br>
     <strong>Фамилия:</strong> ${user.lastName}<br>
     <a href="/logout">Выйти</a>
+    <#if user.role = "ROLE_ADMIN">
+        <a href="/admin">Панель администратора</a>
+    </#if>
 </div>
 </body>
-
 </html>

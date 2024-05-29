@@ -32,11 +32,18 @@ public class RecipeServiceImpl {
         }
     }
 
+    public void deleteRecipe(UUID id){
+        recipeRepository.deleteById(id);
+    }
+
     public Recipe getRecipeById(UUID id){
         return recipeRepository.findById(id).orElse(new Recipe());
     }
 
     public List<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
+    }
+    public List<Recipe> recipesByCategory(Category category){
+        return recipeRepository.findByCategory(category);
     }
 }

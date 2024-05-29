@@ -17,11 +17,19 @@
     <tbody>
     <#list categories as category>
         <tr>
-            <td>${category.categoryName}</td>
+            <td><a href="/categories/${category.categoryId}">${category.categoryName}</a></td>
+            <#if user.role = "ROLE_ADMIN" >
+                <td>
+                    <form action="/admin/delete-category/${category.categoryId}" method="post">
+                        <input type="hidden" name="categoryId" value="${category.categoryId}">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
+            </#if>
+
         </tr>
     </#list>
     </tbody>
 </table>
-<a href="/create-category">Создать новую категорию</a>
 </body>
 </html>
