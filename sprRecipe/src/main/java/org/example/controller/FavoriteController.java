@@ -28,4 +28,10 @@ public class FavoriteController {
         model.addAttribute("favorites", favorites);
         return "favorites";
     }
+
+    @PostMapping("/favorites/remove/{favoriteId}")
+    public String removeFromFavorites(@PathVariable UUID favoriteId,Principal principal) {
+        favoriteService.removeFromFavorites(favoriteId);
+        return "redirect:/favorites"; // После удаления избранного перенаправляем на страницу с избранными рецептами
+    }
 }

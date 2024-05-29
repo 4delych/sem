@@ -23,7 +23,12 @@
             <td>${favorite.recipe.name}</td>
             <td>${favorite.recipe.description}</td>
             <td>${favorite.recipe.category.categoryName}</td>
-            <td><a href="/remove-favorite?favoriteId=${favorite.id}">Удалить</a></td>
+            <td>
+                <form action="/favorites/remove/${favorite.id}" method="post">
+                    <input type="hidden" name="favoriteId" value="${favorite.id}">
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
         </tr>
     </#list>
     </tbody>

@@ -66,5 +66,4 @@ public class RecipeController {
         favoriteService.addToFavorites(user, recipe);
         return "redirect:/recipe/" + recipeId;
     }
-
 }

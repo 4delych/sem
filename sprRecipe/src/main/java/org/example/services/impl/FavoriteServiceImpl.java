@@ -5,7 +5,6 @@ import org.example.model.Favorite;
 import org.example.model.Recipe;
 import org.example.model.User;
 import org.example.repository.FavoriteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,4 +27,7 @@ public class FavoriteServiceImpl {
         return favoriteRepository.findByUser(user);
     }
 
+    public void removeFromFavorites(UUID id){
+        favoriteRepository.deleteById(id);
+    }
 }
