@@ -14,12 +14,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RecipeForm {
+public class IngredientForm {
     @NotBlank
     private String name;
-    @NotBlank
-    private String description;
-    @NotNull
-    private UUID categoryId;
-    private Set<UUID> ingredientIds;
 }

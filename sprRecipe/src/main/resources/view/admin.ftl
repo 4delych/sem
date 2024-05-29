@@ -9,6 +9,7 @@
 <ul>
     <li><a href="/admin/create-recipe">Create Recipe</a></li>
     <li><a href="/admin/create-category">Create Category</a></li>
+    <li><a href="/admin/ingredients">Ingredients</a></li>
 </ul>
 
     <a href="/profile">Назад</a>

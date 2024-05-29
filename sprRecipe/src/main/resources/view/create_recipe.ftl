@@ -22,6 +22,13 @@
             <option value="${category.categoryId}">${category.categoryName}</option>
         </#list>
     </select>
+    <label for="ingredients">Ингредиенты:</label>
+    <#list ingredients as ingredient>
+        <div>
+            <input type="checkbox" id="ingredient-${ingredient.ingredientId}" name="ingredientIds" value="${ingredient.ingredientId}">
+            <label for="ingredient-${ingredient.ingredientId}">${ingredient.name}</label>
+        </div>
+    </#list>
 
     <button type="submit">Создать рецепт</button>
 </form>

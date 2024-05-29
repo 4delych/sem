@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "Ingridient")
+@Table(name = "Ingredients")
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,8 +20,8 @@ public class Ingredient {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "ingredient_id")
-    UUID ingredientId;
+    private UUID ingredientId;
 
-    @Column(name = "ingredientName", nullable = false)
-    private String ingredientName;
+    @Column(name = "name", nullable = false)
+    private String name;
 }
