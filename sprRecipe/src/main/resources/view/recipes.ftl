@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<#include "menu.ftl">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,9 +19,9 @@
     <tbody>
     <#list recipes as recipe>
         <tr>
-            <td>${recipe.name}</td>
+            <td><a href="/recipe/${recipe.recipe_id}">${recipe.name}</a></td>
             <td>${recipe.description}</td>
-            <td>${recipe.category}</td>
+            <td>${recipe.category.categoryName}</td>
         </tr>
     </#list>
     </tbody>

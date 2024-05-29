@@ -6,7 +6,7 @@ import org.example.dto.SignUpForm;
 import org.example.exception.UserAlreadyExistsException;
 import org.example.model.Role;
 import org.example.model.User;
-import org.example.repository.UsersRepository;
+import org.example.repository.UserRepository;
 import org.example.security.UserDetailsImpl;
 import org.example.services.AuthService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,12 +21,12 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 public class AuthServiceImpl implements AuthService {
-    private final UsersRepository usersRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public void register(SignUpForm form) throws UserAlreadyExistsException {
-            if(usersRepository.existsByUsername(form.getUsername())) {
+            if(userRepository.existsByUsername(form.getUsername())) {
                 throw new UserAlreadyExistsException("already exist");
             }
             User user = User.builder()
@@ -34,14 +34,14 @@ public class AuthServiceImpl implements AuthService {
                     .lastname(form.getLastName())
                     .username(form.getUsername())
                     .password(passwordEncoder.encode(form.getPassword()))
-                    .role(Role.ROLE_ADMIN)
+                    .role(Role.ROLE_USER)
                     .build();
-            usersRepository.save(user);
+            userRepository.save(user);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> optionalUser = usersRepository.findByUsername(username);
+        Optional<User> optionalUser = userRepository.findByUsername(username);
         if(optionalUser.isEmpty()) {
             throw new UsernameNotFoundException("not found");
         }

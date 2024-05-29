@@ -1,5 +1,5 @@
 <html lang="en">
-
+<#include "menu.ftl">
 <head>
     <title>Профиль пользователя</title>
 </head>

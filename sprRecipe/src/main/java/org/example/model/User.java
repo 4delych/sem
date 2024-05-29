@@ -21,7 +21,8 @@ public class User {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID user_id;
+    @Column(name = "user_id")
+    private UUID userId;
 
     @Column(name = "created_date", updatable = false)
     @CreationTimestamp
@@ -40,7 +41,7 @@ public class User {
     private String password;
 
     @Column(name = "avatar_id")
-    UUID avatar_id;
+    UUID avatarId;
 
     @Column(name = "role", nullable = false)
     private Role role;

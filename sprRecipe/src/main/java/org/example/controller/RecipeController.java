@@ -6,15 +6,18 @@ import lombok.Value;
 import org.example.dto.RecipeForm;
 import org.example.model.Category;
 import org.example.model.Recipe;
+import org.example.repository.RecipeRepository;
 import org.example.services.impl.CategoryServiceImpl;
 import org.example.services.impl.RecipeServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @AllArgsConstructor
@@ -41,4 +44,12 @@ public class RecipeController {
         model.addAttribute("recipes", recipes);
         return "recipes";
     }
+
+    @GetMapping("/recipe/{id}")
+    public String showRecipe(@PathVariable("id") UUID id, Model model) {
+        Recipe recipe = recipeService.getRecipeById(id);
+        model.addAttribute("recipe", recipe);
+        return "recipe_details";
+    }
+
 }

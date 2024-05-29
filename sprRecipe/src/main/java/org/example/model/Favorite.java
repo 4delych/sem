@@ -2,7 +2,6 @@ package org.example.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -12,23 +11,21 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "Recipe")
+@Table(name = "favorites")
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class Recipe {
+public class Favorite {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID recipe_id;
-
-    @Column(name = "recipe_name", nullable = false)
-    private String name;
-
-    @Column(name = "description", nullable = false)
-    private String description;
+    private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "recipe_id", referencedColumnName = "recipe_id")
+    private Recipe recipe;
 }

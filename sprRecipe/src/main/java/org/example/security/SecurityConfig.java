@@ -18,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-    static final String[] PERMIT = {"/res/**", "/sign-up"};
+    static final String[] PERMIT = {"/res/**", "/sign-up", "/sign-in", "/recipes"};
 
     private final PasswordEncoder passwordEncoder;
     private final AuthService authService;

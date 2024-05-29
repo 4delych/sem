@@ -1,9 +1,6 @@
 package org.example.controller;
 
 import lombok.AllArgsConstructor;
-import org.example.model.User;
-import org.example.repository.UsersRepository;
-import org.example.services.AuthService;
 import org.example.services.impl.AuthServiceImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;

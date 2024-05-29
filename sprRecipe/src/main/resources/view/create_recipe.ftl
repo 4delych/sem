@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<#include "menu.ftl">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +17,7 @@
     <textarea id="description" name="description" required></textarea>
 
     <label for="category">Категория:</label>
-    <select id="category" name="category" required>
+    <select id="category" name="categoryId" required>
         <#list categories as category>
             <option value="${category.categoryId}">${category.categoryName}</option>
         </#list>
