@@ -41,7 +41,17 @@ public class RecipeServiceImpl {
             throw new IllegalArgumentException("Invalid category ID");
         }
     }
-
+    public void updateRecipe(UUID id, RecipeForm form) {
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+        if (optionalRecipe.isPresent()) {
+            Recipe recipe = optionalRecipe.get();
+            recipe.setName(form.getName());
+            recipe.setDescription(form.getDescription());
+            recipeRepository.save(recipe);
+        } else {
+            throw new IllegalArgumentException("Recipe not found");
+        }
+    }
     public void deleteRecipe(UUID id){
         recipeRepository.deleteById(id);
     }

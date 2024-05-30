@@ -13,6 +13,10 @@
         <input type="hidden" name="recipeId" value="${recipe.recipe_id}">
         <button type="submit">Добавить в избранное</button>
     </form>
+    <#if user.role ="ROLE_ADMIN">
+        <a href="/admin/recipe/${recipe.recipe_id}/edit">редактировать</a>
+    </#if>
+
     <a href = "/recipes">Назад</a>
 </body>
 </html>

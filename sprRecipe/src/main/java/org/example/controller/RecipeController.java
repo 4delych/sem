@@ -4,12 +4,10 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.dto.RecipeForm;
 import org.example.model.Category;
+import org.example.model.Ingredient;
 import org.example.model.Recipe;
 import org.example.model.User;
-import org.example.services.impl.CategoryServiceImpl;
-import org.example.services.impl.FavoriteServiceImpl;
-import org.example.services.impl.RecipeServiceImpl;
-import org.example.services.impl.UserServiceImpl;
+import org.example.services.impl.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +21,8 @@ import java.util.UUID;
 public class RecipeController {
     private final RecipeServiceImpl recipeService;
     private final UserServiceImpl userService;
-
+    private final CategoryServiceImpl categoryService;
+    private final IngredientServiceImpl ingredientService;
     private final FavoriteServiceImpl favoriteService;
 
     @GetMapping("/recipes")
@@ -36,9 +35,11 @@ public class RecipeController {
     }
 
     @GetMapping("/recipe/{id}")
-    public String showRecipe(@PathVariable("id") UUID id, Model model) {
+    public String showRecipe(@PathVariable("id") UUID id, Model model, Principal principal) {
         Recipe recipe = recipeService.getRecipeById(id);
+        User user = userService.getUserByUsername(principal.getName());
         model.addAttribute("recipe", recipe);
+        model.addAttribute("user", user);
         return "recipe_details";
     }
 
@@ -48,5 +49,22 @@ public class RecipeController {
         Recipe recipe = recipeService.getRecipeById(recipeId);
         favoriteService.addToFavorites(user, recipe);
         return "redirect:/recipe/" + recipeId;
+    }
+
+    @GetMapping("/admin/recipe/{id}/edit")
+    public String editRecipeForm(@PathVariable("id") UUID id, Model model) {
+        Recipe recipe = recipeService.getRecipeById(id);
+        List<Category> categories = categoryService.getAllCategories();
+        List<Ingredient> ingredients = ingredientService.getAllIngredients();
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("categories", categories);
+        model.addAttribute("ingredients", ingredients);
+        return "edit_recipe";
+    }
+
+    @PostMapping("/admin/recipe/{id}/edit")
+    public String editRecipe(@PathVariable("id") UUID id, @ModelAttribute @Valid RecipeForm form) {
+        recipeService.updateRecipe(id, form);
+        return "redirect:/recipes";
     }
 }
