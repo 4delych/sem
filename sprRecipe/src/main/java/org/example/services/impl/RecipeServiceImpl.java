@@ -56,6 +56,11 @@ public class RecipeServiceImpl {
         recipeRepository.deleteById(id);
     }
 
+
+    public List<Recipe> findRecipesByIngredientIds(Set<UUID> ingredientIds) {
+        return recipeRepository.findDistinctByIngredients_IdIn(ingredientIds);
+    }
+
     public Recipe getRecipeById(UUID id){
         return recipeRepository.findById(id).orElse(new Recipe());
     }

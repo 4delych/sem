@@ -18,7 +18,7 @@
         <tr>
             <td>${ingredient.name}</td>
             <td>
-                <form action="/admin/delete-ingredient/${ingredient.ingredientId}" method="post">
+                <form action="/admin/delete-ingredient/${ingredient.id}" method="post">
                     <button type="submit">Удалить</button>
                 </form>
             </td>

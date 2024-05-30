@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Controller
@@ -26,13 +27,24 @@ public class RecipeController {
     private final FavoriteServiceImpl favoriteService;
 
     @GetMapping("/recipes")
-    public String listRecipes(Model model, Principal principal){
-        List<Recipe> recipes = recipeService.getAllRecipes();
+    public String listRecipes(Model model, @RequestParam(value = "ingredientIds", required = false) Set<UUID> ingredientIds, Principal principal) {
         User user = userService.getUserByUsername(principal.getName());
-        model.addAttribute("user", user);
+        List<Recipe> recipes;
+        if (ingredientIds != null && !ingredientIds.isEmpty()) {
+            recipes = recipeService.findRecipesByIngredientIds(ingredientIds);
+        } else {
+            recipes = recipeService.getAllRecipes();
+        }
+        List<Ingredient> ingredients = ingredientService.getAllIngredients();
         model.addAttribute("recipes", recipes);
+        model.addAttribute("ingredients", ingredients);
+        if (ingredientIds != null) { // Проверяем, не является ли ingredientIds null перед добавлением в модель
+            model.addAttribute("selectedIngredients", ingredientIds);
+        }
+        model.addAttribute("user", user);
         return "recipes";
     }
+
 
     @GetMapping("/recipe/{id}")
     public String showRecipe(@PathVariable("id") UUID id, Model model, Principal principal) {

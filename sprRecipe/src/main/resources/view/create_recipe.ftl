@@ -25,8 +25,8 @@
     <label for="ingredients">Ингредиенты:</label>
     <#list ingredients as ingredient>
         <div>
-            <input type="checkbox" id="ingredient-${ingredient.ingredientId}" name="ingredientIds" value="${ingredient.ingredientId}">
-            <label for="ingredient-${ingredient.ingredientId}">${ingredient.name}</label>
+            <input type="checkbox" id="ingredient-${ingredient.id}" name="ingredientIds" value="${ingredient.id}">
+            <label for="ingredient-${ingredient.id}">${ingredient.name}</label>
         </div>
     </#list>
 
