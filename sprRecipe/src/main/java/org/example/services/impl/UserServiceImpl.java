@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import org.example.model.User;
 import org.example.repository.UserRepository;
 import org.example.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

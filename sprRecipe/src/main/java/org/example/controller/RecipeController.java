@@ -79,4 +79,14 @@ public class RecipeController {
         recipeService.updateRecipe(id, form);
         return "redirect:/recipes";
     }
+    @GetMapping("/random-recipe")
+    public String getRandomRecipeView() {
+        return "random_recipe";
+    }
+    @PostMapping("/random-recipe")
+    public String getRandomRecipe(Model model) {
+        String recipe = recipeService.getRandomRecipe();
+        model.addAttribute("recipe", recipe);
+        return "random_recipe";
+    }
 }

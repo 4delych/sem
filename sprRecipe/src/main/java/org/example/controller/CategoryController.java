@@ -1,21 +1,16 @@
 package org.example.controller;
 
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.example.dto.CategoryForm;
 import org.example.model.Category;
 import org.example.model.Recipe;
 import org.example.model.User;
-import org.example.repository.RecipeRepository;
 import org.example.services.impl.CategoryServiceImpl;
 import org.example.services.impl.RecipeServiceImpl;
 import org.example.services.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;

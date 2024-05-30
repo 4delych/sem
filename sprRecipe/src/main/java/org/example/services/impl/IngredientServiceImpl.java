@@ -20,10 +20,6 @@ public class IngredientServiceImpl {
         ingredientRepository.save(ingredient);
     }
 
-    public Ingredient findById(UUID id){
-        return ingredientRepository.findById(id).orElseThrow();
-    }
-
     public void deleteIngredient(UUID id){
         ingredientRepository.deleteById(id);
     }

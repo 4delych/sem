@@ -1,7 +1,6 @@
 package org.example.repository;
 
 import org.example.model.Category;
-import org.example.model.Ingredient;
 import org.example.model.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 

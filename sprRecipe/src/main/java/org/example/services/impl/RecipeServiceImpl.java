@@ -8,9 +8,8 @@ import org.example.model.Recipe;
 import org.example.repository.CategoryRepository;
 import org.example.repository.IngredientRepository;
 import org.example.repository.RecipeRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
@@ -20,6 +19,13 @@ public class RecipeServiceImpl {
     private final RecipeRepository recipeRepository;
     private final CategoryRepository categoryRepository;
     private IngredientRepository ingredientRepository;
+    private static final String API_URL = "https://api.spoonacular.com/recipes/random?apiKey=fde5054c98a14fe593d1e944c98d4ffb";
+
+    public String getRandomRecipe() {
+        RestTemplate restTemplate = new RestTemplate();
+        String response = restTemplate.getForObject(API_URL, String.class);
+        return response;
+    }
 
     public void createRecipe(RecipeForm form) {
         Set<Ingredient> ingredients = new HashSet<>();

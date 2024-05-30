@@ -1,7 +1,6 @@
 package org.example.services.impl;
 
 import lombok.AllArgsConstructor;
-
 import org.example.dto.SignUpForm;
 import org.example.exception.UserAlreadyExistsException;
 import org.example.model.Role;
@@ -14,8 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
-import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor

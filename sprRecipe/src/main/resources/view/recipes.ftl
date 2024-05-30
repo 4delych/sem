@@ -31,7 +31,6 @@
     <thead>
     <tr>
         <th>Название</th>
-        <th>Описание</th>
         <th>Категория</th>
         <#if user.role == "ROLE_ADMIN">
             <th>Действие</th>
@@ -42,7 +41,6 @@
     <#list recipes as recipe>
         <tr>
             <td><a href="/recipe/${recipe.recipe_id}">${recipe.name}</a></td>
-            <td>${recipe.description}</td>
             <td>${recipe.category.categoryName}</td>
             <#if user.role == "ROLE_ADMIN">
                 <td>

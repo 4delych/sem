@@ -2,13 +2,14 @@ package org.example.controller;
 
 import lombok.AllArgsConstructor;
 import org.example.model.Favorite;
-import org.example.model.Recipe;
 import org.example.model.User;
 import org.example.services.impl.FavoriteServiceImpl;
 import org.example.services.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;
@@ -30,8 +31,8 @@ public class FavoriteController {
     }
 
     @PostMapping("/favorites/remove/{favoriteId}")
-    public String removeFromFavorites(@PathVariable UUID favoriteId,Principal principal) {
+    public String removeFromFavorites(@PathVariable UUID favoriteId) {
         favoriteService.removeFromFavorites(favoriteId);
-        return "redirect:/favorites"; // После удаления избранного перенаправляем на страницу с избранными рецептами
+        return "redirect:/favorites";
     }
 }

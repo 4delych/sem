@@ -34,5 +34,6 @@
 </form>
 
 <a href="/recipes">К списку рецептов</a>
+<a href="/admin">Назад</a>
 </body>
 </html>
